@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Garage Synapsec | Google Cloud Solution</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #1a73e8;
+            --dark-blue: #0d47a1;
+            --light-blue: #e8f0fe;
+            --accent-blue: #4285f4;
+            --google-blue: #4285f4;
+            --google-green: #34a853;
+            --google-yellow: #fbbc05;
+            --google-red: #ea4335;
+            --white: #ffffff;
+            --gray-light: #f8f9fa;
+            --gray-medium: #dadce0;
+            --gray-dark: #5f6368;
+            --text-dark: #202124;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-blue);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--google-blue);
+        }
+
+        .google-cloud-badge {
+            background: linear-gradient(90deg, var(--google-blue), var(--google-green));
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 16px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-blue);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-blue);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #f8faff 0%, #ffffff 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 60%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(66, 133, 244, 0.08) 0%, rgba(66, 133, 244, 0) 70%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text {
+            flex: 1;
+            padding-right: 40px;
+        }
+
+        .hero-visual {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .hero h1 span {
+            color: var(--primary-blue);
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--gray-dark);
+            margin-bottom: 30px;
+            max-width: 90%;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: var(--primary-blue);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(26, 115, 232, 0.3);
+        }
+
+        .cta-button:hover {
+            background-color: var(--dark-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(26, 115, 232, 0.4);
+        }
+
+        .cloud-visual {
+            width: 100%;
+            max-width: 500px;
+            height: 300px;
+            background: linear-gradient(135deg, #e8f0fe 0%, #ffffff 100%);
+            border-radius: 16px;
+            position: relative;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            border: 1px solid var(--gray-medium);
+        }
+
+        .cloud-icon {
+            position: absolute;
+            font-size: 24px;
+            color: var(--google-blue);
+        }
+
+        .icon-1 { top: 20%; left: 15%; }
+        .icon-2 { top: 40%; right: 20%; color: var(--google-green); }
+        .icon-3 { bottom: 30%; left: 25%; color: var(--google-yellow); }
+        .icon-4 { bottom: 20%; right: 30%; color: var(--google-red); }
+
+        .cloud-connection {
+            position: absolute;
+            height: 2px;
+            background: linear-gradient(90deg, var(--google-blue), var(--google-green));
+            transform-origin: left;
+        }
+
+        .connection-1 { top: 28%; left: 20%; width: 100px; transform: rotate(15deg); }
+        .connection-2 { top: 45%; left: 30%; width: 120px; transform: rotate(-10deg); }
+        .connection-3 { bottom: 35%; left: 30%; width: 90px; transform: rotate(5deg); }
+
+        /* Two Column Layout */
+        .two-column-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 15px;
+        }
+
+        .section-title p {
+            font-size: 18px;
+            color: var(--gray-dark);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .two-column-container {
+            display: flex;
+            gap: 50px;
+        }
+
+        .column {
+            flex: 1;
+        }
+
+        .column-left {
+            background-color: var(--white);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            border-top: 5px solid var(--primary-blue);
+        }
+
+        .column-right {
+            background-color: var(--white);
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            border-top: 5px solid var(--google-green);
+        }
+
+        .column h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .column h3 i {
+            color: var(--primary-blue);
+        }
+
+        .feature-list {
+            list-style: none;
+        }
+
+        .feature-list li {
+            margin-bottom: 20px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .feature-list li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--google-green);
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .integration-card {
+            background-color: var(--light-blue);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: var(--transition);
+            border-left: 4px solid var(--google-blue);
+        }
+
+        .integration-card:hover {
+            transform: translateX(5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .integration-card h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .integration-card p {
+            color: var(--gray-dark);
+            font-size: 15px;
+        }
+
+        /* Architecture Diagram */
+        .architecture-section {
+            padding: 80px 0;
+            background-color: var(--gray-light);
+        }
+
+        .architecture-container {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .architecture-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .architecture-node {
+            background-color: var(--white);
+            border-radius: 12px;
+            padding: 25px;
+            width: 200px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-top: 4px solid var(--google-blue);
+        }
+
+        .architecture-node:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .architecture-node i {
+            font-size: 32px;
+            color: var(--google-blue);
+            margin-bottom: 15px;
+        }
+
+        .architecture-node h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .architecture-node p {
+            font-size: 14px;
+            color: var(--gray-dark);
+        }
+
+        .connection-line {
+            height: 2px;
+            background: linear-gradient(90deg, var(--google-blue), var(--google-green));
+            width: 100px;
+            margin: 0 auto;
+            position: relative;
+            top: 50%;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 18px;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+
+        .cta-button-light {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: white;
+            color: var(--primary-blue);
+            padding: 16px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .cta-button-light:hover {
+            background-color: var(--light-blue);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 40px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 50px;
+        }
+
+        .footer-column h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-column a {
+            display: block;
+            color: #bdc1c6;
+            text-decoration: none;
+            margin-bottom: 12px;
+            transition: var(--transition);
+        }
+
+        .footer-column a:hover {
+            color: white;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #3c4043;
+            color: #9aa0a6;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .two-column-container {
+                flex-direction: column;
+            }
+            
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .hero-text {
+                padding-right: 0;
+                margin-bottom: 50px;
+            }
+            
+            .hero p {
+                max-width: 100%;
+            }
+            
+            .architecture-row {
+                flex-wrap: wrap;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .nav-links {
+                gap: 20px;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .section-title h2 {
+                font-size: 30px;
+            }
+            
+            .column-left, .column-right {
+                padding: 30px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-container">
+                    <div class="logo">
+                        <i class="fas fa-robot"></i>
+                        AI Garage
+                    </div>
+                    <div class="google-cloud-badge">
+                        <i class="fab fa-google"></i>
+                        Google Cloud Solution
+                    </div>
+                </div>
+                <nav class="nav-links">
+                    <a href="#solution">Solution</a>
+                    <a href="#integration">Integration</a>
+                    <a href="#architecture">Architecture</a>
+                    <a href="#contact">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Synapsec on <span>Google Cloud</span></h1>
+                    <p>AI-driven cyber risk management and compliance platform built on Google Cloud's secure, scalable infrastructure. Automate NIS2, DORA, AI Act, and ISO 27001 compliance with AI-powered insights.</p>
+                    <a href="#solution" class="cta-button">
+                        Explore Solution
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="hero-visual">
+                    <div class="cloud-visual">
+                        <div class="cloud-icon icon-1">
+                            <i class="fas fa-database"></i>
+                        </div>
+                        <div class="cloud-icon icon-2">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="cloud-icon icon-3">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="cloud-icon icon-4">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="cloud-connection connection-1"></div>
+                        <div class="cloud-connection connection-2"></div>
+                        <div class="cloud-connection connection-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Two Column Section -->
+    <section id="solution" class="two-column-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Google Cloud Powered Solution</h2>
+                <p>Synapsec leverages Google Cloud's advanced services to deliver enterprise-grade cyber risk management and compliance automation</p>
+            </div>
+            <div class="two-column-container">
+                <div class="column column-left">
+                    <h3><i class="fas fa-cogs"></i> Core Capabilities</h3>
+                    <ul class="feature-list">
+                        <li>AI-driven predictive risk assessment for supply chain partners</li>
+                        <li>Automated compliance with NIS2, DORA, AI Act, ISO 27001</li>
+                        <li>Real-time cyber risk dashboard with scoring and alerts</li>
+                        <li>Supplier self-assessment and audit management</li>
+                        <li>Incident reporting aligned with regulatory requirements</li>
+                        <li>Centralized DORA Register of Information (ROI) management</li>
+                        <li>ESG and procurement risk extension modules</li>
+                        <li>Collaborative environment for company-supplier engagement</li>
+                    </ul>
+                </div>
+                <div id="integration" class="column column-right">
+                    <h3><i class="fas fa-plug"></i> Google Cloud Integration</h3>
+                    <div class="integration-card">
+                        <h4><i class="fas fa-chart-bar"></i> BigQuery Analytics</h4>
+                        <p>Process and analyze large volumes of supplier, audit, and incident data for actionable insights and reporting.</p>
+                    </div>
+                    <div class="integration-card">
+                        <h4><i class="fas fa-robot"></i> Vertex AI</h4>
+                        <p>Power predictive risk modeling, automated assessments, and NLP processing of compliance documentation.</p>
+                    </div>
+                    <div class="integration-card">
+                        <h4><i class="fas fa-hdd"></i> Cloud Storage</h4>
+                        <p>Securely manage evidence, reports, and regulatory artifacts with enterprise-grade security and accessibility.</p>
+                    </div>
+                    <div class="integration-card">
+                        <h4><i class="fas fa-shield-alt"></i> Security Command Center</h4>
+                        <p>Enhance threat detection and security posture management across your cloud environment.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture Diagram -->
+    <section id="architecture" class="architecture-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Solution Architecture</h2>
+                <p>Modern, scalable architecture built on Google Cloud services</p>
+            </div>
+            <div class="architecture-container">
+                <div class="architecture-row">
+                    <div class="architecture-node">
+                        <i class="fas fa-user-shield"></i>
+                        <h4>Synapsec Platform</h4>
+                        <p>User interface and business logic</p>
+                    </div>
+                    <div class="connection-line"></div>
+                    <div class="architecture-node">
+                        <i class="fas fa-api"></i>
+                        <h4>Cloud APIs</h4>
+                        <p>RESTful APIs and microservices</p>
+                    </div>
+                </div>
+                <div class="architecture-row">
+                    <div class="architecture-node">
+                        <i class="fas fa-brain"></i>
+                        <h4>Vertex AI</h4>
+                        <p>Predictive risk modeling & NLP</p>
+                    </div>
+                    <div class="architecture-node">
+                        <i class="fas fa-database"></i>
+                        <h4>BigQuery</h4>
+                        <p>Data analytics & reporting</p>
+                    </div>
+                    <div class="architecture-node">
+                        <i class="fas fa-hdd"></i>
+                        <h4>Cloud Storage</h4>
+                        <p>Secure document management</p>
+                    </div>
+                </div>
+                <div class="architecture-row">
+                    <div class="architecture-node">
+                        <i class="fas fa-shield-alt"></i>
+                        <h4>Security</h4>
+                        <p>IAM, encryption, monitoring</p>
+                    </div>
+                    <div class="connection-line"></div>
+                    <div class="architecture-node">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                        <h4>Global Infrastructure</h4>
+                        <p>Scalable, reliable, low-latency</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Transform Your Compliance & Risk Management?</h2>
+            <p>Join leading enterprises that trust Synapsec on Google Cloud to automate compliance, reduce risk, and strengthen their cybersecurity posture across the entire supply chain.</p>
+            <a href="mailto:roberto@aigarage.work" class="cta-button-light">
+                Contact Our Team
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">
+                        <i class="fas fa-robot"></i>
+                        AI Garage by Yaroze srl
+                    </div>
+                    <p>Research and Development lab specialized in AI applications for Cybersecurity, ESG, REGTECH, Mechatronics, and Media.</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Solution</h4>
+                        <a href="#solution">Overview</a>
+                        <a href="#integration">Google Cloud Integration</a>
+                        <a href="#architecture">Architecture</a>
+                        <a href="#">Case Studies</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Company</h4>
+                        <a href="https://aigarage.work" target="_blank">Website</a>
+                        <a href="mailto:roberto@aigarage.work">Contact</a>
+                        <a href="#">Partnership</a>
+                        <a href="#">Careers</a>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Legal</h4>
+                        <a href="#">Privacy Policy</a>
+                        <a href="#">Terms of Service</a>
+                        <a href="#">Compliance</a>
+                        <a href="#">Security</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 AI Garage (Yaroze srl). All rights reserved. Synapsec is a modular cyber risk & compliance platform.</p>
+                <p>Website: <a href="https://aigarage.work" style="color: #8ab4f8;">aigarage.work</a> | Email: <a href="mailto:roberto@aigarage.work" style="color: #8ab4f8;">roberto@aigarage.work</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements to animate
+        document.querySelectorAll('.column-left, .column-right, .architecture-node').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(el);
+        });
+
+        // Cloud visualization animation
+        const cloudIcons = document.querySelectorAll('.cloud-icon');
+        cloudIcons.forEach((icon, index) => {
+            icon.style.animation = `float ${3 + index * 0.5}s ease-in-out infinite alternate`;
+        });
+
+        // Add CSS animation for floating effect
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes float {
+                0% { transform: translateY(0px); }
+                100% { transform: translateY(-10px); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
